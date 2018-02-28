@@ -13,7 +13,6 @@
             <h1 class="text-center">YOU</h1>
             <div class="healthbar">
                 <div class="healthbar text-center" :style="{width: playerHealth+'%'}" style="background-color: green; margin: 0; color: white;">
-
                 </div>
             </div>
         </div>
@@ -21,28 +20,32 @@
             <h1 class="text-center">MONSTER</h1>
             <div class="healthbar">
                 <div class="healthbar text-center" :style="{width: monsterHealth+'%'}" style="background-color: green; margin: 0; color: white;">
-
+                <div class="healthbar text-center" :style="{width: monsterHealth+'%'}" style="background-color: green; margin: 0; color: white;">
                 </div>
             </div>
         </div>
     </section>
     <section class="row controls">
         <div class="small-12 columns">
-            <button id="start-game">START NEW GAME</button>
+            <button id="start-game" @click="newGame">START NEW GAME</button>
+            <h1>{{result}}</h1>
         </div>
     </section>
     <section class="row controls">
         <div class="small-12 columns">
             <button id="attack" @click = "attack">ATTACK</button>
             <button id="special-attack" @click = "specialAttack">SPECIAL ATTACK</button>
-            <button id="heal">HEAL</button>
+            <button id="heal" @click = "heal">HEAL</button>
             <button id="give-up">GIVE UP</button>
         </div>
     </section>
     <section class="row log">
         <div class="small-12 columns">
             <ul>
-                <li>
+                <li v-for="(element, index) in actions">
+                    <p v-if="element.type === 'monster'" style="background-color: blue;">Hai colpito il mostro con {{element.value}}</p>
+                    <p v-if="element.type === 'user'"  style="background-color: red;">Ti ha colpito il mostro con {{element.value}}</p>
+                    <p v-if="element.type === 'health'"  style="background-color: green;">Ti sei curato con {{element.value}}</p>
                 </li>
             </ul>
         </div>
